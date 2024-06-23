@@ -1,0 +1,60 @@
+1. to install truffle use
+        npm install -g truffle
+
+2. to initialize truffle use
+        truffle init
+
+3. create your contract in "contract " folder
+
+3.1 to compile your contract 
+        truffle compile
+
+4. installing a dependency 
+    npm install dotenv @truffle/hdwallet-provider
+
+5. create .env file in root folder and paste this
+        MNEMONIC = "chicken mansion cheese medal art predict soldier idea mean crazy fragile smile"
+        PROJECT_ID = "9563a1d4822d4c8892a9c725169904ab"
+
+
+5.1 --> go to truffle-config.js and use this
+        require('dotenv').config();
+const { MNEMONIC, PROJECT_ID } = process.env;
+
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+6. open truffle-config.js
+        go to networks and then paste this:
+                sepolia: {
+      provider: () => new HDWalletProvider(MNEMONIC, `https://eth-sepolia.g.alchemy.com/v2/${PROJECT_ID}`),
+      network_id: 11155111,  // Sepolia's network id
+      gas: 4500000,          // Gas limit
+      gasPrice: 10000000000  // 10 Gwei
+    },
+
+    network id, gas and gas price are this by default in sepolia network
+    MNEMONIC is my secret phrase of metamask
+    Https link is the link from alchemy
+
+7. in migrations folder write the deploying code
+        const Contract_obj_name = artifacts.require("name_of_the_contract");
+
+        module.exports = function (deployer) {
+        deployer.deploy(Contract_obj_name);
+        };
+
+8. then write 
+        truffle migrate --network sepolia
+
+
+
+
+
+
+
+
+
+
+
+9. NOW COMES THE LAST TESTING PART
+        
